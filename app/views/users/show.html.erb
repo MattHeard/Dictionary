@@ -7,7 +7,9 @@
 
 <p>
   <strong>Description:</strong>
-  <%= @user.description %>
+  <% @user.description.split.each do |word| %>
+    <%= link_to word, new_user_word_path(@user, word: word) %>
+  <% end %>
 </p>
 
 <%= link_to 'Back', users_path %>

@@ -1,0 +1,30 @@
+<% require 'pp' %>
+<h1>New word</h1>
+
+<%= form_for([ @user.tap { |x| pp x }, @word ]) do |f| %>
+  <% if @word.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@word.errors.count, "error") %> prohibited this word from being saved:</h2>
+
+      <ul>
+      <% @word.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :word %><br>
+    <%= f.text_field :word, value: @word.word, disabled: true %>
+  </div>
+  <div class="field">
+    <%= f.label :definition %><br>
+    <%= f.text_field :definition %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', user_path(@user) %>
