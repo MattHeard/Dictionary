@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160420215129) do
+ActiveRecord::Schema.define(version: 20160420230423) do
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -19,5 +19,15 @@ ActiveRecord::Schema.define(version: 20160420215129) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  create_table "words", force: :cascade do |t|
+    t.string   "word"
+    t.string   "definition"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+  end
+
+  add_index "words", ["user_id"], name: "index_words_on_user_id"
 
 end
