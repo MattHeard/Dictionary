@@ -12,6 +12,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    @words = Word.pluck(:word).uniq.sort
   end
 
   def show
