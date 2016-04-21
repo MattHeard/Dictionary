@@ -17,7 +17,8 @@
   </div>
   <div class="field">
     <%= f.label :definition %><br>
-    <%= f.text_area :definition, cols: 60, rows: 10 %>
+    <%= f.text_area :definition, cols: 60, rows: 10, onkeyup: "updateWordCount()", onchange: "updateWordCount()" %>
+    <div id="word_count">0/100</div>
   </div>
   <div class="actions">
     <%= f.submit %>
