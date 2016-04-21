@@ -9,9 +9,9 @@
   <strong>Description:</strong>
   <% @user.description.split.each do |word| %>
     <% if @defined_word_hash[cleanup(word)] %>
-      <%= link_to word, [@user, @defined_word_hash[cleanup(word)]] %>
+      <%= link_to word, [@user, @defined_word_hash[cleanup(word)]], class: "frequency #{colour_decile(word, @frequencies)}" %>
     <% else %>
-      <%= link_to word, new_user_word_path(@user, new_word: cleanup(word)) %>
+      <%= link_to word, new_user_word_path(@user, new_word: cleanup(word)), class: "frequency #{colour_decile(word, @frequencies)}" %>
     <% end %>
   <% end %>
 </p>

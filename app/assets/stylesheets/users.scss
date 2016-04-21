@@ -1,3 +1,53 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+a.frequency:hover {
+  color: inherit;
+  background-color: inherit;
+  text-decoration: none;
+}
+
+.frequency.decile1 {
+  background-color: #FFFFFF;
+}
+
+.frequency.decile2 {
+  background-color: #E8F4F9;
+}
+
+.frequency.decile3 {
+  background-color: #D2E8F4;
+}
+
+.frequency.decile4 {
+  background-color: #BBDDEE;
+}
+
+.frequency.decile5 {
+  background-color: #A4D2E8;
+}
+
+.frequency.decile6 {
+  color: #FFFFFF;
+  background-color: #8EC6E3;
+}
+
+.frequency.decile7 {
+  color: #FFFFFF;
+  background-color: #77BBDD;
+}
+
+.frequency.decile8 {
+  color: #FFFFFF;
+  background-color: #60B0D7;
+}
+
+.frequency.decile9 {
+  color: #FFFFFF;
+  background-color: #4AA4D2;
+}
+
+.frequency.decile10 {
+  color: #FFFFFF;
+  background-color: #3399CC;
+}

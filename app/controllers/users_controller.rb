@@ -7,6 +7,7 @@ class UsersController < ApplicationController
 
   def show
     set_defined_word_hash
+    set_frequencies
   end
 
   def new
@@ -46,5 +47,17 @@ class UsersController < ApplicationController
       hash
     end
     @defined_word_hash.default = nil
+  end
+
+  def set_frequencies
+    descriptions = User.pluck(:description)
+    words = descriptions.join(" ").split.map { |word| SimplifiedWord.new(word).call }
+    pp words
+    @frequencies = words.inject({}) do |frequencies, word|
+      count = words.count { |w| w == word }
+      frequencies[word] = count if count > 1
+      frequencies
+    end
+    @frequencies.default = 0
   end
 end
