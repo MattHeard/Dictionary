@@ -54,7 +54,7 @@ class WordsController < ApplicationController
   end
 
   def defined_word_models
-    @user.words.where(word: @word.definition.split)
+    @user.words.where(word: @word.definition.split.map { |word| SimplifiedWord.new(word).call })
   end
 
   def set_defined_word_hash
