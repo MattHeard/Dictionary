@@ -5,11 +5,10 @@ class SimplifiedWord
   }
 
   def initialize(word)
-    @word = word
+    @word = word.gsub(matcher, "")
   end
 
   def call
-    word.gsub!(matcher, "")
     if whitelist.include?(word)
       word
     else
