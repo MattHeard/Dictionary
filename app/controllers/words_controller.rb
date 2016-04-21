@@ -7,11 +7,11 @@ class WordsController < ApplicationController
 
   def create
     set_user
-    if ValidateHundredWordLength.new(definition).call || true
-      word = @user.words.build(word_params[:word])
-      if word.save
-        redirect_to user_word_url(@user, word)
-      end
+    build_word
+    if ValidateHundredWordLength.new(definition).call && @word.save
+      redirect_to user_word_url(@user, @word)
+    else
+      render :new
     end
   end
 
@@ -21,6 +21,10 @@ class WordsController < ApplicationController
   end
 
   private
+
+  def build_word
+    @word = @user.words.build(word_params[:word])
+  end
 
   def set_user
     @user = User.find(params[:user_id])
