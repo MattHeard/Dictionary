@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20160420230423) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "description"
@@ -28,6 +31,7 @@ ActiveRecord::Schema.define(version: 20160420230423) do
     t.integer  "user_id"
   end
 
-  add_index "words", ["user_id"], name: "index_words_on_user_id"
+  add_index "words", ["user_id"], name: "index_words_on_user_id", using: :btree
 
+  add_foreign_key "words", "users"
 end
