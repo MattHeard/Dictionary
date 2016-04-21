@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    set_defined_word_hash
   end
 
   def new
@@ -42,15 +43,28 @@ class UsersController < ApplicationController
   end
 
   private
-    def set_user
-      @user = User.find(params[:id])
-    end
 
-    def user_params
-      params.require(:user).permit(:name, :description)
-    end
+  def set_user
+    @user = User.find(params[:id])
+  end
 
-    def description
-      user_params[:description]
+  def user_params
+    params.require(:user).permit(:name, :description)
+  end
+
+  def description
+    user_params[:description]
+  end
+
+  def defined_word_models
+    @user.words.where(word: @user.description.split)
+  end
+
+  def set_defined_word_hash
+    @defined_word_hash = defined_word_models.inject({}) do |hash, word_model|
+      hash[word_model.word] = word_model
+      hash
     end
+    @defined_word_hash.default = nil
+  end
 end

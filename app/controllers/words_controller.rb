@@ -18,6 +18,7 @@ class WordsController < ApplicationController
   def show
     set_user
     set_word
+    set_defined_word_hash
   end
 
   private
@@ -40,5 +41,17 @@ class WordsController < ApplicationController
 
   def definition
     params[:word][:definition]
+  end
+
+  def defined_word_models
+    @user.words.where(word: @word.definition.split)
+  end
+
+  def set_defined_word_hash
+    @defined_word_hash = defined_word_models.inject({}) do |hash, word_model|
+      hash[word_model.word] = word_model
+      hash
+    end
+    @defined_word_hash.default = nil
   end
 end

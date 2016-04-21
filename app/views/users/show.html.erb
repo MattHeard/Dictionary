@@ -8,7 +8,11 @@
 <p>
   <strong>Description:</strong>
   <% @user.description.split.each do |word| %>
-    <%= link_to word, new_user_word_path(@user, new_word: word) %>
+    <% if @defined_word_hash[cleanup(word)] %>
+      <%= link_to word, [@user, @defined_word_hash[cleanup(word)]] %>
+    <% else %>
+      <%= link_to word, new_user_word_path(@user, new_word: cleanup(word)) %>
+    <% end %>
   <% end %>
 </p>
 
