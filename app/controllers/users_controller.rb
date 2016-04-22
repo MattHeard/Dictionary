@@ -27,10 +27,14 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    if ValidateHundredWordLength.new(description).call && @user.save
-      redirect_to @user, notice: "User was successfully created."
-    else
+    if !ValidateHundredWordLength.new(description).call
+      @user.errors[:description] = "You must use exactly 100 words to describe yourself. No more. No less."
       render :new
+    elsif !@user.save
+      @user.errors[:db] = "Didn't work. Not sure why."
+      render :new
+    else
+      redirect_to @user, notice: "User was successfully created."
     end
   end
 
