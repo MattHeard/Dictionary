@@ -1,12 +1,9 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Word:</strong>
-  <%= @word.word %>
-</p>
+<h1><%= @word.word %></h1>
+<p>as defined by <strong><%= @user.name %></strong></p>
 
 <p>
-  <strong>Definition:</strong>
   <% @word.definition.split.each do |word| %>
     <% if @defined_word_hash[cleanup(word)] %>
       <%= link_to word, [@user, @defined_word_hash[cleanup(word)]], class: "frequency #{colour_decile(word, @frequencies)}" %>
