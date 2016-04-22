@@ -1,7 +1,7 @@
 class SimplifiedWord
   WHITELIST = %w{
     I is was his Wikipedia US us politics ethics overseas as 80s Timberlake's
-    has
+    has Was
   }
 
   def initialize(word)
