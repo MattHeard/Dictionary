@@ -1,7 +1,6 @@
 class SimplifiedWord
   WHITELIST = %w{
-    I is was his Wikipedia US us politics ethics overseas as 80s Timberlake's
-    has Was
+    I is was his Wikipedia us politics ethics overseas as 80s Timberlake's has
   }
 
   def initialize(word)
@@ -9,7 +8,9 @@ class SimplifiedWord
   end
 
   def call
-    if whitelist.include?(word)
+    if whitelist.include?(word.downcase)
+      word.downcase
+    elsif whitelist.include?(word)
       word
     else
       word.downcase.singularize
