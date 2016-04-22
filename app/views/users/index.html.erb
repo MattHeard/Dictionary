@@ -2,11 +2,25 @@
 
 <h1>Dictionary</h1>
 
-<p><strong>Words:</strong>
-<% @words.each do |word| %>
-  <a href="/words/<%= word.html_safe %>"><%= word %></a>
+<p><strong>Words:</strong></p>
+<ul>
+<% if @words.count { |word| !('a'..'z').include?(word.chars.first.downcase) } > 0 %>
+  <li><strong>#:</strong>
+  <% @words.select { |word| ('a'..'z').include?(word.chars.first.downcase) }.each do |word| %>
+    <a href="/words/<%= word.html_safe %>"><%= word %></a>
+  <% end %>
+  </li>
 <% end %>
-</p>
+<% ('a'..'z').each do |letter| %>
+  <% if @words.count { |word| word.chars.first.downcase == letter } > 0 %>
+    <li><strong><%= letter.upcase %>:</strong>
+    <% @words.select { |word| word.chars.first.downcase == letter }.each do |word| %>
+      <a href="/words/<%= word.html_safe %>"><%= word %></a>
+    <% end %>
+    </li>
+  <% end %>
+<% end %>
+</ul>
 
 <p><strong>Users:</strong>
 <% @users.each do |user| %>
