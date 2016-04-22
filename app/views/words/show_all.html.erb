@@ -5,7 +5,6 @@
 <% end %>
 
 <% @definitions.each do |definition| %>
-  <% pp definition %>
   <p>as defined by <strong><%= definition[:author] %></strong></p>
   <p>
   <% definition[:text].split.each do |word| %>
