@@ -5,7 +5,7 @@
 <h2>Words</h2>
 <div>
 <% @words.each do |word| %>
-  <span><%= word %></span>
+  <a href="/words/<%= word.html_safe %>"><%= word %></a>
 <% end %>
 </div>
 
@@ -35,7 +35,6 @@
 
 <h2>To do</h2>
 <ul>
-  <li>Link each defined word on the index page to a page showing the definitions each user has given it.</li>
   <li>Fix discrepancies in word counting in frontend and backend validations.</li>
 </ul>
 

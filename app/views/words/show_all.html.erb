@@ -1,0 +1,18 @@
+<h1><%= @word %></h1>
+
+<% if @definitions.empty? %>
+  <p>It looks like nobody has defined this word yet.</p>
+<% end %>
+
+<% @definitions.each do |definition| %>
+  <% pp definition %>
+  <p>as defined by <strong><%= definition[:author] %></strong></p>
+  <p>
+  <% definition[:text].split.each do |word| %>
+    <%= link_to word, "/words/#{simplify(word)}", class: "frequency #{colour_decile(word, @frequencies)}" %>
+  <% end %>
+  </p>
+  <br />
+<% end %>
+
+<%= link_to 'Back', users_path %>

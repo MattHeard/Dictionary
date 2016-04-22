@@ -28,7 +28,13 @@ class WordsController < ApplicationController
     set_user
     set_word
     set_defined_word_hash
-    set_frequencies
+    set_frequencies(@word.word)
+  end
+
+  def show_all
+    @word = params[:word]
+    set_definitions(@word)
+    set_frequencies(@word)
   end
 
   private
@@ -65,11 +71,11 @@ class WordsController < ApplicationController
     @defined_word_hash.default = nil
   end
 
-  def set_frequencies
-    definitions = Word.where(word: @word.word).pluck(:definition)
+  def set_frequencies(word)
+    definitions = Word.where(word: word).pluck(:definition)
     words = definitions.join(" ").split.map { |word| SimplifiedWord.new(word).call }
     words -= common_words
-    words.delete(@word.word)
+    words.delete(word)
     @frequencies = words.inject({}) do |frequencies, word|
       count = words.count { |w| w == word }
       frequencies[word] = count if count > 1
@@ -80,5 +86,12 @@ class WordsController < ApplicationController
 
   def common_words
     COMMON_WORDS
+  end
+
+  def set_definitions(word)
+    @definitions = Word.where(word: word).map do |word|
+      { author: word.user.name, text: word.definition }
+    end
+    @definitions.shuffle!
   end
 end
