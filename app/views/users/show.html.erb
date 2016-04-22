@@ -2,18 +2,14 @@
 
 <h1><%= @user.name %></h1>
 
-<h2>Words</h2>
-<div>
+<p><strong>has defined the words:</strong>
 <% @words.each do |word| %>
   <span><%= link_to word.word, [@user, word] %></span>
 <% end %>
-</div>
+</p>
 
-<br />
 <p>
   <strong>Who is <%= @user.name %>?</strong>
-</p>
-<p>
   <% @user.description.split.each do |word| %>
     <% if @defined_word_hash[simplify(word)] %>
       <%= link_to word, [@user, @defined_word_hash[simplify(word)]], class: "frequency #{colour_decile(word, @frequencies)}" %>
