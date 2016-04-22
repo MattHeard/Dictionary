@@ -2,34 +2,17 @@
 
 <h1>Dictionary</h1>
 
-<h2>Words</h2>
-<div>
+<p><strong>Words:</strong>
 <% @words.each do |word| %>
   <a href="/words/<%= word.html_safe %>"><%= word %></a>
 <% end %>
-</div>
+</p>
 
-<h2>Users</h2>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.name %></td>
-        <td><%= user.description %></td>
-        <td><%= link_to 'Show', user %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<br />
+<p><strong>Users:</strong>
+<% @users.each do |user| %>
+  <%= link_to user.name, user %><%= "," unless user == @users.last %>
+<% end %>
+</p>
 
 <p><%= link_to 'New User', new_user_path %></p>
 
