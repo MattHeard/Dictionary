@@ -6,7 +6,7 @@
 <ul>
 <% if @words.count { |word| !('a'..'z').include?(word.chars.first.downcase) } > 0 %>
   <li><strong>#:</strong>
-  <% @words.select { |word| ('a'..'z').include?(word.chars.first.downcase) }.each do |word| %>
+  <% @words.select { |word| !('a'..'z').include?(word.chars.first.downcase) }.each do |word| %>
     <a href="/words/<%= word.html_safe %>"><%= word %></a>
   <% end %>
   </li>
