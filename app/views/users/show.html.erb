@@ -1,12 +1,19 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
+<h1><%= @user.name %></h1>
 
+<h2>Words</h2>
+<div>
+<% @words.each do |word| %>
+  <span><%= link_to word.word, [@user, word] %></span>
+<% end %>
+</div>
+
+<br />
 <p>
-  <strong>Description:</strong>
+  <strong>Who is <%= @user.name %>?</strong>
+</p>
+<p>
   <% @user.description.split.each do |word| %>
     <% if @defined_word_hash[simplify(word)] %>
       <%= link_to word, [@user, @defined_word_hash[simplify(word)]], class: "frequency #{colour_decile(word, @frequencies)}" %>

@@ -12,12 +12,13 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
-    @words = Word.pluck(:word).uniq.sort
+    @words = Word.pluck(:word).sort
   end
 
   def show
     set_defined_word_hash
     set_frequencies
+    @words = @user.words.sort_by { |word| word.word }
   end
 
   def new
