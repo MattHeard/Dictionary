@@ -64,6 +64,7 @@ class UsersController < ApplicationController
     descriptions = User.pluck(:description)
     words = descriptions.join(" ").split.map { |word| SimplifiedWord.new(word).call }
     words -= common_words
+    words -= @user.name.split.map { |word| SimplifiedWord.new(word).call }
     @frequencies = words.inject({}) do |frequencies, word|
       count = words.count { |w| w == word }
       frequencies[word] = count if count > 1
